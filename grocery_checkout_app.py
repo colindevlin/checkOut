@@ -1,3 +1,5 @@
+from selenium.webdriver.common.devtools.v133.fetch import continue_request
+
 grocery_list = [
     {"item": "apples", "price": 2.00, "quantity": 5, "category": "Produce"},
     {"item": "bread", "price": 3.50, "quantity": 2, "category": "Bakery"},
@@ -106,13 +108,17 @@ def main_checkout():
 
 # ***** main event loop: *****
 coupon_code = input("Enter a coupon code, or press 'enter': ").upper()
-if coupon_code not in coupons:
-    print(f"Sorry, {coupon_code} is not valid at this time.")
+if coupon_code.isalpha():
+    if coupon_code not in coupons:
+        print(f"Sorry, {coupon_code} is not valid at this time.")
 
 shipping_choice = input("Do you need shipping? Y/N: ").upper()
 if shipping_choice == "Y":
     shipping_distance = input("Enter how many miles to ship: ")
     shipping_cost = apply_shipping(shipping_distance)
+elif shipping_choice == "N":
+    shipping_cost = 0
+
 
 
 main_checkout()
